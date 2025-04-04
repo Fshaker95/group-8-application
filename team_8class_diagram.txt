@@ -1,0 +1,50 @@
+﻿classDiagram
+
+
+class Config {
+   +load_config()
+   +get_path()
+}
+
+
+class IssueLoader {
+   +load_issues(file_path)
+}
+
+
+class Analyzer {
+   +analyze_labels(data)
+   +analyze_contributors(data)
+   +analyze_activity(data)
+   +analyze_issue_status(data)
+   +average_close_time(data)
+   +analyze_active_days(data)
+   +generate_word_frequencies(data)
+   +analyze_contributor_expertise(data)
+   +correlate_issues_with_churn(issue_data, churn_data)
+}
+
+
+class Plotter {
+   +plot_pie(data)
+   +plot_bar(data)
+   +plot_timeline(data)
+   +plot_wordcloud(freq_dict)
+   +plot_network(expertise_map)
+   +plot_correlation(correlation_map)
+}
+
+
+class Main {
+   +run()
+   +parse_args()
+}
+
+
+%% Named Relationships
+Main --> Config : loads configuration
+Main --> IssueLoader : loads issues
+Main --> Analyzer : runs analysis
+Main --> Plotter : handles_visualization
+Analyzer --> Plotter : sends analysis results
+Analyzer --> IssueLoader : fetches issue data
