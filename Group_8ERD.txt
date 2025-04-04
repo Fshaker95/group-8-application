@@ -1,0 +1,35 @@
+erDiagram
+    %% ================ Entities ================
+    ISSUE {
+        int number PK
+        string url
+        string title
+        string text
+        string state
+        datetime created_date
+        datetime updated_date
+        datetime closed_date
+    }
+
+    USER {
+        string login PK
+    }
+
+    LABEL {
+        string name PK
+    }
+
+    EVENT {
+        string event_type
+        datetime event_date
+        string label
+        string comment
+    }
+
+    %% ================ Relationships ================
+    USER ||--|{ ISSUE : "creates"
+    ISSUE }|--|{ LABEL : "tagged_with"
+    ISSUE ||--o{ EVENT : "has"
+    USER ||--o{ EVENT : "authors"
+    %% Add the assigned relationship
+    ISSUE }|--|{ USER : "assigned_to"
