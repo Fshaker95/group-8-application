@@ -1,0 +1,99 @@
+﻿classDiagram
+direction LR
+   class run_py {
+       "Handles command-line parsing, orchestrates analyses"
+       + parse_args() : argparse.Namespace
+       + main() : None
+   }
+
+
+   class config_py {
+       "Manages application configuration"
+       + get_parameter(name: str) : Any
+       + set_parameter(name: str, value: Any) : None
+       + overwrite_from_args(args: Any) : None
+   }
+
+
+   class data_loader_py {
+       "Loads issues from the JSON file"
+       + get_issues() : List~Issue~
+       - _load() : List~Issue~
+   }
+
+
+   class Issue {
+       + url : str
+       + creator : str
+       + labels : List~str~
+       + state : State
+       + assignees : List~str~
+       + title : str
+       + text : str
+       + number : int
+       + created_date : datetime
+       + updated_date : datetime
+       + timeline_url : str
+       + events : List~Event~
+       + from_json()
+   }
+
+
+   class Event {
+       + event_type : str
+       + author : str
+       + event_date : datetime
+       + label : str
+       + comment : str
+       + from_json()
+   }
+
+
+   class State {
+       + open
+       + closed
+   }
+
+
+   class temporal_analysis_py {
+       + TemporalAnalysis
+       "Scenario 1: Issue bursts & resolution efficiency"
+   }
+
+
+   class label_expertise_py {
+       + LabelExpertiseAnalysis
+       "Scenario 2: Contributor-label engagement"
+   }
+
+
+   class issue_age_py {
+       + IssueAgeAnalysis
+       "Scenario 3: Days-to-close distribution"
+   }
+
+
+   <<Module>> run_py
+   <<Module>> config_py
+   <<Module>> data_loader_py
+   <<enumeration>> State
+   <<Module>> temporal_analysis_py
+   <<Module>> label_expertise_py
+   <<Module>> issue_age_py
+
+
+   run_py --> temporal_analysis_py : "calls"
+   run_py --> label_expertise_py : "calls"
+   run_py --> issue_age_py : "calls"
+   run_py --> config_py : "uses"
+   run_py --> data_loader_py : "uses"
+   data_loader_py --> config_py : "get_parameter('ENPM611_PROJECT_DATA_PATH')"
+   data_loader_py --> Issue : "creates"
+   Issue --> Event : "has many"
+   Issue --> State : "uses"
+   temporal_analysis_py --> data_loader_py : "loads issues"
+   label_expertise_py --> data_loader_py : "loads issues"
+   issue_age_py --> data_loader_py : "loads issues"
+   temporal_analysis_py --> Issue : "analyzes"
+   label_expertise_py --> Issue : "analyzes"
+   issue_age_py --> Issue : "analyzes"
