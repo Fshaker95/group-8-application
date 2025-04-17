@@ -53,6 +53,8 @@ elif args.feature == 1:
 elif args.feature == 2:
     run_feature_2()
 elif args.feature == 3:
+    pass
+elif args.feature == 4:
     from feature2_heatmap import run_feature_2_heatmap
     run_feature_2_heatmap()
 else:

@@ -18,9 +18,18 @@ def run_feature_2_heatmap():
             for label in normalized_labels:
                 contributor_label_map[issue.creator][label] += 1
 
-        # Count contributions via comments
+        # Count assignees
+        for assignee in issue.assignees:
+            if isinstance(assignee, dict) and 'login' in assignee:
+                assignee_login = assignee['login']
+            else:
+                assignee_login = assignee  # if already a string
+            for label in normalized_labels:
+                contributor_label_map[assignee_login][label] += 1
+
+        # Count commenters from events
         for event in issue.events:
-            if event.event_type == "commented" and event.author:
+            if event.author:
                 for label in normalized_labels:
                     contributor_label_map[event.author][label] += 1
 
@@ -38,9 +47,10 @@ def run_feature_2_heatmap():
     # Heatmap
     plt.figure(figsize=(14, 6))
     sns.heatmap(df_top, annot=True, cmap="YlGnBu", linewidths=0.5, linecolor='gray')
-    plt.title("🔍 Contributor Expertise Zones by Label")
-    plt.xlabel("Labels")
+    plt.title("Contributor Expertise by Label (Top 10 Contributors)")
+    plt.xlabel("Issue Labels (Expertise Zones)")
     plt.ylabel("Contributors")
-    plt.xticks(rotation=45)
+    plt.xticks(rotation=60, ha='right')  # rotated, aligned
+    plt.yticks(rotation=0)
     plt.tight_layout()
     plt.show()
