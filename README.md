@@ -1,49 +1,108 @@
-# ENPM611 Project Application Template
+# ENPM611 Team 8 – GitHub Issue Analytics
 
-This is the template for the ENPM611 class project. Use this template in conjunction with the provided data to implement an application that analyzes GitHub issues for the [poetry](https://github.com/python-poetry/poetry/issues) Open Source project and generates interesting insights.
+This repository implements a feature-rich analysis application for GitHub issues from the python-poetry project. The goal is to extract insightful patterns about issue volume, resolution speed, and contributor engagement.
 
-This application template implements some of the basic functions:
+# Project Structure
 
-- `data_loader.py`: Utility to load the issues from the provided data file and returns the issues in a runtime data structure (e.g., objects)
-- `model.py`: Implements the data model into which the data file is loaded. The data can then be accessed by accessing the fields of objects.
-- `config.py`: Supports configuring the application via the `config.json` file. You can add other configuration paramters to the `config.json` file.
-- `run.py`: This is the module that will be invoked to run your application. Based on the `--feature` command line parameter, one of the three analyses you implemented will be run. You need to extend this module to call other analyses.
+🔹 **run.py**
+Main entry point. Based on the --feature argument, it dispatches the corresponding analysis function.
 
-With the utility functions provided, you should focus on implementing creative analyses that generate intersting and insightful insights.
+🔹 **model.py**
+Defines the Issue and Event classes. Handles parsing of issue data including created_date, updated_date, and closed_date.
 
-In addition to the utility functions, an example analysis has also been implemented in `example_analysis.py`. It illustrates how to use the provided utility functions and how to produce output.
+🔹 **data_loader.py**
+Loads the JSON issue dataset and converts each entry into Issue objects using the model.
 
-## Setup
+🔹 **config.py**
+Loads configuration values from config.json or environment variables.
 
-To get started, your team should create a fork of this repository. Then, every team member should clone your repository to their local computer. 
+🔹 **config.json**
+Specifies the path to the JSON data file (e.g., Milestone-1/team8_poetry_data.json).
 
+🔹 **Milestone-1/team8_poetry_data.json**
+Contains the GitHub issue dataset for the Poetry project. Used as the primary data source for all feature analyses.
 
-### Install dependencies
+🔹 **example_analysis.py**
+Example starter analysis to demonstrate how to load and iterate over issues.
 
-In the root directory of the application, create a virtual environment, activate that environment, and install the dependencies like so:
+🔹 **feature1_temporal_analysis.py**
+Implements Feature 1: Groups issues by month and plots issue creation count and average resolution time over time using a dual-axis line chart.
 
-```
+🔹 **feature2_contributor_expertise.py**
+Implements Feature 2: Accepts a label from user input, identifies contributors related to that label, and shows their interaction count in a bar chart.
+
+🔹 **feature3.py**
+Implements Feature 3: Calculates how many days each issue remained open and visualizes the distribution using a histogram and box plot to show resolution efficiency and outliers.
+
+🔹 **requirements.txt**
+Specifies required Python packages (e.g., matplotlib, python-dateutil).
+
+🔹 **README.md**
+Provides setup instructions, feature descriptions, and how to run each analysis.
+
+# **Setup Instructions**
+**1. Clone the Repo**
+
+git clone https://github.com/Fshaker95/group-8-application.git
+cd group-8-application
+
+**2. Install Dependencies**
+
 pip install -r requirements.txt
-```
 
-### Download and configure the data file
+**3. Configure the Data File**
 
-Download the data file (in `json` format) from the project assignment in Canvas and update the `config.json` with the path to the file. Note, you can also specify an environment variable by the same name as the config setting (`ENPM611_PROJECT_DATA_PATH`) to avoid committing your personal path to the repository.
+Ensure the team8_poetry_data.json file is located at:
+**Milestone-1/team8_poetry_data.json** (config.json is already configured with the path)
+
+# How to Run Features
+
+From the root of the project, run:
+
+python run.py --feature <n> (Where <n> is the feature number (1 to 3))
+
+# Feature 1: Temporal Analysis of Issue Bursts
+
+**python run.py --feature 1**
+
+-Groups issues by creation month
+-Calculates how many were created and their average days-to-close
+-Displays a dual-axis line chart of:
+  -Number of issues created (🔵)
+  -Avg days to close (🔴)
+
+# Feature 2: Label-Driven Contributor Expertise
+
+**python run.py --feature 2**
+
+Requires input at runtime: You’ll be prompted to enter a label like:
+
+**Enter a label to analyze (e.g., 'bug'):**
+
+**Example Labels You Can Try (Feature 2)**-
+kind/bug
+status/triage
+type/feature
+dependencies
+
+-Identifies top contributors for the selected label
+-Counts issue creators and commenters
+-Displays a bar chart of the top 10 contributors for that label
+
+# Feature 3: Issue Age Distribution
+
+**python run.py --feature 3**
+
+-Computes how many days each issue remained open
+-Plots:
+  Histogram: frequency of days-to-close
+  Box plot: shows outliers, median, and spread
+
+# Notes
+-model.py was modified to include a new closed_date attribute from the JSON field closed_at
+-The dataset is located in Milestone-1/
+-The application uses matplotlib for plotting
 
 
-### Run an analysis
-
-With everything set up, you should be able to run the existing example analysis:
-
-```
-python run.py --feature 0
-```
-
-That will output basic information about the issues to the command line.
 
 
-## VSCode run configuration
-
-To make the application easier to debug, runtime configurations are provided to run each of the analyses you are implementing. When you click on the run button in the left-hand side toolbar, you can select to run one of the three analyses or run the file you are currently viewing. That makes debugging a little easier. This run configuration is specified in the `.vscode/launch.json` if you want to modify it.
-
-The `.vscode/settings.json` also customizes the VSCode user interface sligthly to make navigation and debugging easier. But that is a matter of preference and can be turned off by removing the appropriate settings.
