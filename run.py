@@ -8,6 +8,8 @@ import argparse
 import config
 from example_analysis import ExampleAnalysis
 from feature2_contributor_expertise import run_feature_2
+from feature1_temporal_analysis import run_feature_1
+
 
 
 def parse_args():
@@ -47,7 +49,7 @@ config.overwrite_from_args(args)
 if args.feature == 0:
     ExampleAnalysis().run()
 elif args.feature == 1:
-    pass # TODO call first analysis
+   run_feature_1()
 elif args.feature == 2:
     run_feature_2()
 elif args.feature == 3:
