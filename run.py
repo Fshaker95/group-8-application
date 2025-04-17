@@ -54,5 +54,8 @@ elif args.feature == 2:
     run_feature_2()
 elif args.feature == 3:
     pass # TODO call third analysis
+elif args.feature == 4:
+    from feature2_heatmap import run_feature_2_heatmap
+    run_feature_2_heatmap()
 else:
     print('Need to specify which feature to run with --feature flag.')

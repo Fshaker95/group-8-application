@@ -62,7 +62,7 @@ class Issue:
     
     def from_json(self, jobj: any):
         self.url = jobj.get('url')
-        self.creator = jobj.get('creator')
+        self.creator = (jobj.get('creator') or jobj.get('user', {}).get('login'))
         self.labels = [lbl['name'] for lbl in jobj.get('labels', []) if isinstance(lbl, dict) and 'name' in lbl]
 
         self.state = State[jobj.get('state')]

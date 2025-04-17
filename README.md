@@ -46,6 +46,7 @@ Provides setup instructions, feature descriptions, and how to run each analysis.
 git clone https://github.com/Fshaker95/group-8-application.git
 cd group-8-application
 
+
 **2. Install Dependencies**
 
 pip install -r requirements.txt
@@ -61,6 +62,7 @@ From the root of the project, run:
 
 python run.py --feature <n> (Where <n> is the feature number (1 to 3))
 
+
 # Feature 1: Temporal Analysis of Issue Bursts
 
 **python run.py --feature 1**
@@ -70,6 +72,7 @@ python run.py --feature <n> (Where <n> is the feature number (1 to 3))
 -Displays a dual-axis line chart of:
   -Number of issues created (🔵)
   -Avg days to close (🔴)
+
 
 # Feature 2: Label-Driven Contributor Expertise
 
@@ -102,7 +105,4 @@ dependencies
 -model.py was modified to include a new closed_date attribute from the JSON field closed_at
 -The dataset is located in Milestone-1/
 -The application uses matplotlib for plotting
-
-
-
 
