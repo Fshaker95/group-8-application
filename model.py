@@ -53,6 +53,7 @@ class Issue:
         self.number:int = -1
         self.created_date:datetime = None
         self.updated_date:datetime = None
+        self.closed_date:datetime = None
         self.timeline_url:str = None
         self.events:List[Event] = []
         
@@ -72,11 +73,15 @@ class Issue:
         except:
             pass
         try:
-            self.created_date = parser.parse(jobj.get('created_date'))
+            self.created_date = parser.parse(jobj.get('created_at'))
         except:
             pass
         try:
-            self.updated_date = parser.parse(jobj.get('updated_date'))
+            self.updated_date = parser.parse(jobj.get('updated_at'))
+        except:
+            pass
+        try:
+            self.closed_date = parser.parse(jobj.get('closed_at'))
         except:
             pass
         self.timeline_url = jobj.get('timeline_url')
