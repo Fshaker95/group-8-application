@@ -28,8 +28,6 @@ Example starter analysis to demonstrate how to load and iterate over issues.
 🔹 **feature1_temporal_analysis.py**
 Implements Feature 1: Groups issues by month and plots issue creation count and average resolution time over time using a dual-axis line chart.
 
-![alt text](image.png)
-
 🔹 **feature2_contributor_expertise.py**
 Implements Feature 2: Accepts a label from user input, identifies contributors related to that label, and shows their interaction count in a bar chart.
 
@@ -75,6 +73,8 @@ python run.py --feature <n> (Where <n> is the feature number (1 to 3))
   -Number of issues created (🔵)
   -Avg days to close (🔴)
 
+![image](https://github.com/user-attachments/assets/69ae5793-f643-472f-ab09-5bfc7da2d66f)
+
 
 # Feature 2: Label-Driven Contributor Expertise
 
@@ -93,6 +93,10 @@ kind/enhancement
 -Counts issue creators and commenters
 -Displays a bar chart of the top 10 contributors for that label
 
+![image](https://github.com/user-attachments/assets/e5f1235a-c2d1-454d-8e11-1067ece92ffb)
+
+![image](https://github.com/user-attachments/assets/c5c2abf4-c66d-444d-a400-edd8a6d3ad68)
+
 # Feature 3: Issue Age Distribution
 
 **python run.py --feature 3**
@@ -101,6 +105,10 @@ kind/enhancement
 -Plots:
   Histogram: frequency of days-to-close
   Box plot: shows outliers, median, and spread
+
+![image](https://github.com/user-attachments/assets/a06c39e7-f21d-451f-876a-fa672f6c53c0)
+
+![image](https://github.com/user-attachments/assets/27e714de-0f0d-4580-97dc-caca1a821bb0)
 
 # Notes
 -model.py was modified to include a new closed_date attribute from the JSON field closed_at
