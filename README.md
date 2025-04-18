@@ -84,9 +84,8 @@ Requires input at runtime: You’ll be prompted to enter a label like:
 
 **Example Labels You Can Try (Feature 2)**-
 kind/bug
-status/triage
-type/feature
-dependencies
+kind/feature
+kind/enhancement
 
 -Identifies top contributors for the selected label
 -Counts issue creators and commenters
