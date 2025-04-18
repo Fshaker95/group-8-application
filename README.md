@@ -28,6 +28,8 @@ Example starter analysis to demonstrate how to load and iterate over issues.
 🔹 **feature1_temporal_analysis.py**
 Implements Feature 1: Groups issues by month and plots issue creation count and average resolution time over time using a dual-axis line chart.
 
+![alt text](image.png)
+
 🔹 **feature2_contributor_expertise.py**
 Implements Feature 2: Accepts a label from user input, identifies contributors related to that label, and shows their interaction count in a bar chart.
 
